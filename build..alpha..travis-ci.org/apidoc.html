@@ -1,0 +1,417 @@
+<div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a
+
+        href="https://github.com/pcardune/handlebars-loader"
+
+    >handlebars-loader (v1.4.0)</a>
+</h1>
+<h4>handlebars loader module for webpack</h4>
+<div class="apidocSectionDiv"><a
+    href="#apidoc.tableOfContents"
+    id="apidoc.tableOfContents"
+><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.handlebars-loader">module handlebars-loader</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.handlebars-loader.handlebars-loader">
+            function <span class="apidocSignatureSpan"></span>handlebars-loader
+            <span class="apidocSignatureSpan">(source)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.handlebars-loader.fastreplace">
+            function <span class="apidocSignatureSpan">handlebars-loader.</span>fastreplace
+            <span class="apidocSignatureSpan">(str, replacements, replaceFn)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.handlebars-loader.findNestedRequires">
+            function <span class="apidocSignatureSpan">handlebars-loader.</span>findNestedRequires
+            <span class="apidocSignatureSpan">(str, requiresPattern)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.handlebars-loader.toString">
+            function <span class="apidocSignatureSpan">handlebars-loader.</span>toString
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.handlebars-loader.fastreplace">module handlebars-loader.fastreplace</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.handlebars-loader.fastreplace.fastreplace">
+            function <span class="apidocSignatureSpan">handlebars-loader.</span>fastreplace
+            <span class="apidocSignatureSpan">(str, replacements, replaceFn)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.handlebars-loader.findNestedRequires">module handlebars-loader.findNestedRequires</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.handlebars-loader.findNestedRequires.findNestedRequires">
+            function <span class="apidocSignatureSpan">handlebars-loader.</span>findNestedRequires
+            <span class="apidocSignatureSpan">(str, requiresPattern)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.handlebars-loader.toString">module handlebars-loader.toString</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.handlebars-loader.toString.toString">
+            function <span class="apidocSignatureSpan">handlebars-loader.</span>toString
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.handlebars-loader" id="apidoc.module.handlebars-loader">module handlebars-loader</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.handlebars-loader.handlebars-loader" id="apidoc.element.handlebars-loader.handlebars-loader">
+        function <span class="apidocSignatureSpan"></span>handlebars-loader
+        <span class="apidocSignatureSpan">(source)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">handlebars-loader = function (source) {
+  if (this.cacheable) this.cacheable();
+  var loaderApi = this;
+  var query = getLoaderConfig(loaderApi);
+  var runtimePath = query.runtime || require.resolve(&#x22;handlebars/runtime&#x22;);
+
+  if (!versionCheck(handlebars, require(runtimePath))) {
+    throw new Error(&#x27;Handlebars compiler version does not match runtime version&#x27;);
+  }
+
+  // Possible extensions for partials
+  var extensions = query.extensions;
+  if (!extensions) {
+    extensions = [&#x22;.handlebars&#x22;, &#x22;.hbs&#x22;, &#x22;&#x22;];
+  }
+  else if (!Array.isArray(extensions)) {
+    extensions = extensions.split(/[ ,;]/g);
+  }
+
+  var rootRelative = query.rootRelative;
+  if (rootRelative == null) {
+    rootRelative = &#x22;./&#x22;;
+  }
+
+  var foundPartials = {};
+  var foundHelpers = {};
+  var foundUnclearStuff = {};
+  var knownHelpers = {};
+
+  var queryKnownHelpers = query.knownHelpers;
+  if (queryKnownHelpers) {
+    [].concat(queryKnownHelpers).forEach(function(k) {
+      knownHelpers[k] = true;
+    });
+  }
+
+  var inlineRequires = query.inlineRequires;
+  if (inlineRequires) {
+    inlineRequires = new RegExp(inlineRequires);
+  }
+
+  var exclude = query.exclude;
+  if (exclude) {
+    exclude = new RegExp(exclude);
+  }
+
+  var debug = query.debug;
+
+  var hb = handlebars.create();
+  var JavaScriptCompiler = hb.JavaScriptCompiler;
+  function MyJavaScriptCompiler() {
+    JavaScriptCompiler.apply(this, arguments);
+  }
+  MyJavaScriptCompiler.prototype = Object.create(JavaScriptCompiler.prototype);
+  MyJavaScriptCompiler.prototype.compiler = MyJavaScriptCompiler;
+  MyJavaScriptCompiler.prototype.nameLookup = function(parent, name, type) {
+    if (debug) {
+      console.log(&#x22;nameLookup %s %s %s&#x22;, parent, name, type);
+    }
+    if (type === &#x22;partial&#x22;) {
+      if (name === &#x27;@partial-block&#x27;) {
+        // this is a built in partial, no need to require it
+        return JavaScriptCompiler.prototype.nameLookup.apply(this, arguments);
+      }
+      if (foundPartials[&#x22;$&#x22; + name]) {
+        return &#x22;require(&#x22; + JSON.stringify(foundPartials[&#x22;$&#x22; + name]) + &#x22;)&#x22;;
+      }
+      foundPartials[&#x22;$&#x22; + name] = null;
+      return JavaScriptCompiler.prototype.nameLookup.apply(this, arguments);
+    }
+    else if (type === &#x22;helper&#x22;) {
+      if (foundHelpers[&#x22;$&#x22; + name]) {
+        return &#x22;__default(require(&#x22; + JSON.stringify(foundHelpers[&#x22;$&#x22; + name]) + &#x22;))&#x22;;
+      }
+      foundHelpers[&#x22;$&#x22; + name] = null;
+      return JavaScriptCompiler.prototype.nameLookup.apply(this, arguments);
+    }
+    else if (type === &#x22;context&#x22;) {
+      // This could be a helper too, save it to check it later
+      if (!foundUnclearStuff[&#x22;$&#x22; + name]) foundUnclearStuff[&#x22;$&#x22; + name] = false;
+      return JavaScriptCompiler.prototype.nameLookup.apply(this, arguments);
+    }
+    else {
+      return JavaScriptCompiler.prototype.nameLookup.apply(this, arguments);
+    }
+  };
+
+  if (inlineRequires) {
+    MyJavaScriptCompiler.prototype.pushString = function(value) {
+      if (inlineRequires.test(value)) {
+        this.pushLiteral(&#x22;require(&#x22; + JSON.stringify(value) + &#x22;)&#x22;);
+      } else {
+        JavaScriptCompiler.prototype.pushString.call(this, value);
+      }
+    };
+    MyJavaScriptCompiler.prototype.appendToBuffer = function (str) {
+      // This is a template (stringified HTML) chunk
+      if (str.indexOf &#x26;&#x26; str.indexOf(&#x27;&#x22;&#x27;) === 0) {
+        var replacements = findNestedRequires(str, inlineRequires);
+        str = fastreplace(str, replacements, function (match) {
+          return &#x22;\&#x22; + require(&#x22; + JSON.stringify(match) + &#x22;) + \&#x22;&#x22;;
+        });
+      }
+      return JavaScriptCompiler.prototype.appendToBuffer.apply(this, arguments);
+    };
+  }
+
+  hb.JavaScriptCompiler = MyJavaScriptCompiler;
+
+  // This is an async loader
+  var loaderAsyncCallback = this.async();
+
+  var firstCompile = true;
+  var compilationPass = 0;
+
+  (function compile() {
+    if (debug) {
+      console.log(&#x22;\nCompilation pass %d&#x22;, ++compilationPass);
+    }
+
+    function referenceToRequest(ref, type) {
+      if (/^\$/.test(ref)) {
+        return ref.substring(1);
+      }
+
+      // Use a relative path for helpers if helper directories are given
+      // unless automatic relative helper r ...</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.handlebars-loader.fastreplace" id="apidoc.element.handlebars-loader.fastreplace">
+        function <span class="apidocSignatureSpan">handlebars-loader.</span>fastreplace
+        <span class="apidocSignatureSpan">(str, replacements, replaceFn)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">fastreplace = function (str, replacements, replaceFn) {
+  var withPlaceholders = replaceWithPlaceholders(str, replacements);
+  var placeholderMap = withPlaceholders.placeholderMap;
+
+  placeholderRegex.lastIndex = 0;
+  return withPlaceholders.content.replace(placeholderRegex, function(match) {
+    var origValue = placeholderMap[match];
+    if (!origValue) return match;
+    return replaceFn(origValue);
+  });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.handlebars-loader.findNestedRequires" id="apidoc.element.handlebars-loader.findNestedRequires">
+        function <span class="apidocSignatureSpan">handlebars-loader.</span>findNestedRequires
+        <span class="apidocSignatureSpan">(str, requiresPattern)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">findNestedRequires = function (str, requiresPattern) {
+  return parser.parse(&#x22;outside&#x22;, str, {
+    requiresPattern: requiresPattern,
+    results: []
+  }).results;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.handlebars-loader.toString" id="apidoc.element.handlebars-loader.toString">
+        function <span class="apidocSignatureSpan">handlebars-loader.</span>toString
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">toString = function () {
+    return text;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.handlebars-loader.fastreplace" id="apidoc.module.handlebars-loader.fastreplace">module handlebars-loader.fastreplace</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.handlebars-loader.fastreplace.fastreplace" id="apidoc.element.handlebars-loader.fastreplace.fastreplace">
+        function <span class="apidocSignatureSpan">handlebars-loader.</span>fastreplace
+        <span class="apidocSignatureSpan">(str, replacements, replaceFn)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">fastreplace = function (str, replacements, replaceFn) {
+  var withPlaceholders = replaceWithPlaceholders(str, replacements);
+  var placeholderMap = withPlaceholders.placeholderMap;
+
+  placeholderRegex.lastIndex = 0;
+  return withPlaceholders.content.replace(placeholderRegex, function(match) {
+    var origValue = placeholderMap[match];
+    if (!origValue) return match;
+    return replaceFn(origValue);
+  });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.handlebars-loader.findNestedRequires" id="apidoc.module.handlebars-loader.findNestedRequires">module handlebars-loader.findNestedRequires</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.handlebars-loader.findNestedRequires.findNestedRequires" id="apidoc.element.handlebars-loader.findNestedRequires.findNestedRequires">
+        function <span class="apidocSignatureSpan">handlebars-loader.</span>findNestedRequires
+        <span class="apidocSignatureSpan">(str, requiresPattern)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">findNestedRequires = function (str, requiresPattern) {
+  return parser.parse(&#x22;outside&#x22;, str, {
+    requiresPattern: requiresPattern,
+    results: []
+  }).results;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.handlebars-loader.toString" id="apidoc.module.handlebars-loader.toString">module handlebars-loader.toString</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.handlebars-loader.toString.toString" id="apidoc.element.handlebars-loader.toString.toString">
+        function <span class="apidocSignatureSpan">handlebars-loader.</span>toString
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function toString() { [native code] }</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
