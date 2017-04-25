@@ -1,4 +1,7 @@
-# api documentation for  [handlebars-loader (v1.4.0)](https://github.com/pcardune/handlebars-loader)  [![npm package](https://img.shields.io/npm/v/npmdoc-handlebars-loader.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-handlebars-loader) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-handlebars-loader.svg)](https://travis-ci.org/npmdoc/node-npmdoc-handlebars-loader)
+# npmdoc-handlebars-loader
+
+#### basic api documentation for  [handlebars-loader (v1.5.0)](https://github.com/pcardune/handlebars-loader)  [![npm package](https://img.shields.io/npm/v/npmdoc-handlebars-loader.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-handlebars-loader) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-handlebars-loader.svg)](https://travis-ci.org/npmdoc/node-npmdoc-handlebars-loader)
+
 #### handlebars loader module for webpack
 
 [![NPM](https://nodei.co/npm/handlebars-loader.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/handlebars-loader)
@@ -36,7 +39,7 @@
     "dependencies": {
         "async": "~0.2.10",
         "fastparse": "^1.0.0",
-        "loader-utils": "0.2.x",
+        "loader-utils": "1.0.x",
         "object-assign": "^4.1.0"
     },
     "description": "handlebars loader module for webpack",
@@ -54,14 +57,14 @@
         "test": "test"
     },
     "dist": {
-        "shasum": "142b2c29bcb8e407554fbc8846feef9f90da3317",
-        "tarball": "https://registry.npmjs.org/handlebars-loader/-/handlebars-loader-1.4.0.tgz"
+        "shasum": "9ebb33aa8066fc0733fb1679b441638ad91184bb",
+        "tarball": "https://registry.npmjs.org/handlebars-loader/-/handlebars-loader-1.5.0.tgz"
     },
     "files": [
         "index.js",
         "lib"
     ],
-    "gitHead": "5c867860a7abd8adb178813c7effbbc50edfb82b",
+    "gitHead": "191817063b0125c29ae811bc6103bd38f059fd73",
     "homepage": "https://github.com/pcardune/handlebars-loader",
     "license": "MIT",
     "licenses": [
@@ -96,7 +99,8 @@
         "lint": "eslint lib/ test/ index.js",
         "test": "mocha"
     },
-    "version": "1.4.0"
+    "version": "1.5.0",
+    "bin": {}
 }
 ```
 
